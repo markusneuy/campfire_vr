@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Campfire</title>
+    <script src="./aframe.js"></script>
+    <script src="./aframe-effects.js"></script>
+    <script src="./sky_shader.js"></script>
+    <script src="./fire.js"></script>
+</head>
+
+<body>
+    <a-scene
+        effects="bloom, godrays, fxaa"
+        godrays="src: #moon; threshold: 0.0 0.0; intensity: 0.6"
+        bloom="strength:0.6; radius: 0.066;"
+        fxaa
+    >
+        <a-assets>
+            <a-asset-item id="trees-gltf" src="./assets/trees/model2.gltf"></a-asset-item>
+
+            <a-asset-item id="fireplace-gltf" src="./assets/fireplace/model2.gltf"></a-asset-item>
+            
+            <a-asset-item id="stone-gltf" src="./assets/stone/model2.gltf"></a-asset-item>
+
+            <a-asset-item id="tiny_stones-gltf" src="./assets/tiny_stones/model2.gltf"></a-asset-item>
+
+            <a-asset-item id="grass-gltf" src="./assets/grass/model2.gltf"></a-asset-item>
+
+            <a-asset-item id="stump-gltf" src="./assets/stump/model2.gltf"></a-asset-item>
+        </a-assets>
+
+        <!-- FIRE -->
+        <a-entity position="0.0 0.0 -3.0">
+            <a-entity gltf-model="#fireplace-gltf" position="0.0 0.01 0.0" shadow="receive: false; cast: false"></a-entity>
+            <a-entity 
+                fire="particles: 500;"
+                position="0.0 -0.2 0.0"
+                sound="src: url(./sound/fire.mp3); autoplay: true; loop: true; refDistance: 1.0; rolloffFactor: 5.0; volume: 1.0; distanceModel: exponential;"
+            ></a-entity>
+
+            <a-entity>
+                <a-entity position="0.0 1.5 0.0">
+                        <a-entity light="type: point; color: #FFA200; intensity: 1.5; distance: 10.0; castShadow: true; shadowMapHeight: 1024; shadowMapWidth: 1024;">
+                                <a-animation attribute="light.intensity" dur="293" fill="forwards" to="1.6" repeat="indefinite" direction="alternate" easing="ease-in-out">
+                            </a-entity>
+                        <a-animation attribute="position" dur="163" fill="forwards" to="0 1.55 0.0" repeat="indefinite" direction="alternate" easing="linear">
+                </a-entity>
+                <a-animation attribute="position" dur="223" fill="forwards" to="0.0 0.0 0.05" repeat="indefinite" direction="alternate" easing="ease-in-out"></a-animation>
+            </a-entity>
+        </a-entity>
+
+        <!-- SURROUNDING -->
+        <a-entity position="0.0 0.0 -3.0">
+                <a-plane
+                position="0.0 0.0 0.0"
+                rotation="-90 0 0"
+                width="40"
+                height="40"
+                material="color: #7F7F7F; roughness: 1.0; metalness: 0.0;"
+                shadow="receive: true; cast: false"
+            ></a-plane>
+
+            <a-entity
+                gltf-model="#trees-gltf"
+                scale="2.0 2.0 2.0" position="4.0 0.0 -1.0"
+                rotation="0 35 0"
+                shadow="receive: false; cast: true"
+                sound="src: url(./sound/wind.mp3); autoplay: true; loop: true; refDistance: 3.0; rolloffFactor: 2.0; volume: 0.02; distanceModel: exponential;"
+            ></a-entity>
+
+            <a-entity
+                gltf-model="#stone-gltf"
+                scale="3.0 3.0 3.0"
+                position="-2.0 0.0 -1.0"
+                rotation="0 135 0"
+                shadow="receive: false; cast: true"
+            ></a-entity>
+
+            <a-entity
+                gltf-model="#tiny_stones-gltf"
+                position="1.0 0.0 -0.5"
+            ></a-entity>
+
+            <a-entity
+                gltf-model="#tiny_stones-gltf"
+                scale="1.5 1.5 1.5"
+                position="-1.0 0.0 0.5"
+                rotation="0 70 0"
+            ></a-entity>
+
+            <a-entity
+                gltf-model="#grass-gltf"
+                position="-1.0 0.0 0.5"
+                rotation="0 0 0"
+                shadow="receive: false; cast: true"
+            ></a-entity>
+
+            <a-entity
+                gltf-model="#grass-gltf"
+                position="-1.5 0.0 -1.0"
+                rotation="0 0 0"
+                shadow="receive: false; cast: true"
+            ></a-entity>
+
+            <a-entity
+                gltf-model="#grass-gltf"
+                position="-1.4 0.0 -1.4"
+                rotation="0 0 0"
+                shadow="receive: false; cast: true"
+            ></a-entity>
+
+            <a-entity
+                gltf-model="#stump-gltf"
+                position="-2.9 0.0 1.3"
+                rotation="0 -60 0"
+                shadow="receive: false; cast: true"
+            ></a-entity>
+        </a-entity>
+
+        
+        <!-- SKY AND AMBIENT-LIKE LIGHT -->
+        <a-entity light="type: hemisphere; color: #0E192B; groundColor: #1D0A57; intensity: 2"></a-entity>
+        <a-entity position="100.0 100.0 -100.0" geometry="primitive: sphere; radius: 10.0;" material="shader: flat; color: #fff;"
+            id="moon"></a-entity>
+        <!-- <a-sky radius="5000" material="color: #000;"></a-sky> -->
+        <a-sky radius="5000" sky-material></a-sky>
+
+    </a-scene>
+</body>
+
+</html>

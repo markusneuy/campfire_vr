@@ -1,0 +1,11 @@
+{
+  "name": "campfirevr-environment",
+  "version": "0.0.0",
+  "description": "A simple A-Frame scene showing a fireplace at night.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": ["webgl", "aframe", "threejs", "javascript", "shader"],
+  "author": "Markus Neuy",
+  "license": "MIT",
+  "private": true
+}
